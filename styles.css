@@ -1,0 +1,145 @@
+:root {
+  --bg: #090b1a;
+  --panel: #141936;
+  --panel-2: #202750;
+  --text: #f2f6ff;
+  --accent: #5de2ff;
+  --ok: #3ad47c;
+  --error: #ff6f91;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at top, #19214a, var(--bg));
+  color: var(--text);
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.card {
+  background: rgba(20, 25, 54, 0.92);
+  border: 1px solid rgba(93, 226, 255, 0.2);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+
+.image-wrap img {
+  max-width: 100%;
+  max-height: 360px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h1, h2, h3, p { margin-top: 0; }
+
+button {
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #041021;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(1.05); }
+
+.timer {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.panel-number,
+.fuel-panel {
+  background: var(--panel-2);
+  border: 1px solid rgba(93, 226, 255, 0.2);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.options button {
+  text-align: left;
+  background: #e6f8ff;
+  color: #081224;
+}
+
+.status {
+  margin-top: 16px;
+  font-weight: 700;
+}
+
+.status.success { color: var(--ok); }
+.status.error { color: var(--error); }
+
+.grid-board {
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.grid-board th,
+.grid-board td {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  width: 52px;
+  height: 52px;
+  text-align: center;
+}
+
+.pin-inputs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(52px, 80px));
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.pin-inputs input {
+  width: 100%;
+  aspect-ratio: 1;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid var(--accent);
+  background: #f3f7ff;
+}
+
+.feedback {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  min-height: 300px;
+}
+
+@media (max-width: 900px) {
+  .two-column { grid-template-columns: 1fr; }
+}
