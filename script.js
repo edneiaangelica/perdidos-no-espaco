@@ -10,8 +10,100 @@ const state = {
   timer: null,
   timeLeft: 0,
   pendingContinue: null,
-  fuelValue: 0
+  fuelValue: 0,
+  soundEnabled: true
 };
+
+// ── Background music ──────────────────────────────────────────
+const bgMusic = new Audio(`${soundBase}musica.mp3`);
+bgMusic.loop = true;
+bgMusic.volume = 0.35;
+let musicUnlocked = false;
+
+document.addEventListener('click', () => {
+  musicUnlocked = true;
+  if (state.soundEnabled) bgMusic.play().catch(() => {});
+}, { once: true });
+
+// ── Service worker ────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+
+// ── PWA install prompt ────────────────────────────────────────
+let deferredInstallPrompt = null;
+const installBanner = document.getElementById('install-banner');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  installBanner.hidden = false;
+});
+
+// iOS: show manual "Add to Home Screen" tip if not already installed
+const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+if (isIOS && !isStandalone) {
+  const existingText = installBanner.querySelector('.install-text');
+  if (existingText) {
+    existingText.innerHTML = 'Para instalar: toque em <strong>⎋</strong> → <strong>Adicionar à tela de início</strong>';
+  }
+  document.getElementById('btn-install').hidden = true;
+  installBanner.hidden = false;
+}
+
+document.getElementById('btn-install').addEventListener('click', async () => {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  const { outcome } = await deferredInstallPrompt.userChoice;
+  if (outcome === 'accepted') installBanner.hidden = true;
+  deferredInstallPrompt = null;
+});
+
+document.getElementById('btn-dismiss').addEventListener('click', () => {
+  installBanner.hidden = true;
+});
+
+window.addEventListener('appinstalled', () => {
+  installBanner.hidden = true;
+  deferredInstallPrompt = null;
+});
+
+// ── HUD: sound toggle ─────────────────────────────────────────
+const btnSound = document.getElementById('btn-sound');
+const btnFullscreen = document.getElementById('btn-fullscreen');
+
+btnSound.addEventListener('click', () => {
+  state.soundEnabled = !state.soundEnabled;
+  if (state.soundEnabled) {
+    btnSound.textContent = '🔊';
+    btnSound.setAttribute('aria-label', 'Silenciar som');
+    if (musicUnlocked) bgMusic.play().catch(() => {});
+  } else {
+    btnSound.textContent = '🔇';
+    btnSound.setAttribute('aria-label', 'Ativar som');
+    bgMusic.pause();
+  }
+});
+
+// ── HUD: fullscreen toggle ────────────────────────────────────
+btnFullscreen.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen().catch(() => {});
+  }
+});
+
+document.addEventListener('fullscreenchange', () => {
+  if (document.fullscreenElement) {
+    btnFullscreen.textContent = '⊡';
+    btnFullscreen.setAttribute('aria-label', 'Sair da tela cheia');
+  } else {
+    btnFullscreen.textContent = '⛶';
+    btnFullscreen.setAttribute('aria-label', 'Tela cheia');
+  }
+});
 
 const narratives = [
   { image: 'narrativa-1', text: 'Vocês são jovens cadetes da Academia Estelar, enviados para explorar o planeta Marte.' },
@@ -34,7 +126,13 @@ const level1 = [
 const level2 = [
   {
     prompt: 'Se o astronauta andar 3 casas para cima e 2 casas para a esquerda, ele vai ficar na mesma posição do(a):',
-    grid: { markers: [{ row: 4, col: 5, symbol: '🧑‍🚀' }, { row: 1, col: 1, symbol: '☀️' }, { row: 2, col: 2, symbol: '⭐' }, { row: 2, col: 4, symbol: '🌜' }, { row: 3, col: 3, symbol: '☄️' }] },
+    grid: { markers: [
+      { row: 4, col: 5, symbol: '🧑‍🚀' },
+      { row: 1, col: 1, symbol: '☀️' },
+      { row: 2, col: 2, symbol: '⭐' },
+      { row: 1, col: 3, symbol: '🌜' },
+      { row: 3, col: 3, symbol: '☄️' }
+    ] },
     options: ['A) SOL', 'B) LUA', 'C) ASTEROIDE', 'E) ESTRELA'],
     correct: 1
   },
@@ -52,13 +150,13 @@ const level2 = [
   },
   {
     prompt: 'Qual é a posição do astronauta?',
-    grid: { markers: [{ row: 0, col: 3, symbol: '🧑‍🚀' }] },
+    grid: { markers: [{ row: 0, col: 4, symbol: '🧑‍🚀' }] },
     options: ['A) A4', 'B) A3', 'C) C4', 'E) B1'],
     correct: 0
   },
   {
     prompt: 'Se o astronauta avançar duas casas para baixo e três casas à esquerda, ele vai ficar em qual posição?',
-    grid: { markers: [{ row: 0, col: 3, symbol: '🧑‍🚀' }] },
+    grid: { markers: [{ row: 1, col: 4, symbol: '🧑‍🚀' }] },
     options: ['A) A3', 'B) D1', 'C) C1', 'E) B1'],
     correct: 1
   }
@@ -73,12 +171,39 @@ const level3 = [
 ];
 
 function sound(name) {
+  if (!state.soundEnabled) return;
   const audio = new Audio(`${soundBase}${name}.mp3`);
   audio.play().catch(() => {});
 }
 
 function imageTag(name, alt = '') {
   return `<img src="${imageBase}${name}.png" alt="${alt || name}" />`;
+}
+
+function progressDots(current, total) {
+  const dots = Array.from({ length: total }, (_, i) => {
+    const cls = i < current ? 'done' : i === current ? 'active' : '';
+    return `<span class="dot ${cls}" aria-hidden="true"></span>`;
+  }).join('');
+  return `<div class="progress-dots" aria-label="Questão ${current + 1} de ${total}">${dots}</div>`;
+}
+
+function scoreLabel(score) {
+  return `<div class="score-label">⭐ ${score} acerto${score !== 1 ? 's' : ''}</div>`;
+}
+
+function buildGrid(markers) {
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+  const colHeaders = [1, 2, 3, 4, 5].map((c) => `<th scope="col">${c}</th>`).join('');
+  const thead = `<thead><tr><th></th>${colHeaders}</tr></thead>`;
+  const bodyRows = [0, 1, 2, 3, 4].map((r) => {
+    const cells = [1, 2, 3, 4, 5].map((c) => {
+      const marker = markers.find((m) => m.row === r && m.col === c);
+      return `<td>${marker ? marker.symbol : ''}</td>`;
+    }).join('');
+    return `<tr><th scope="row">${letters[r]}</th>${cells}</tr>`;
+  }).join('');
+  return `<table class="grid-board">${thead}<tbody>${bodyRows}</tbody></table>`;
 }
 
 function formatTime(s) {
@@ -94,15 +219,21 @@ function stopTimer() {
   }
 }
 
+function updateTimerDisplay(seconds) {
+  const node = document.querySelector('[data-timer]');
+  if (!node) return;
+  node.textContent = formatTime(Math.max(0, seconds));
+  const container = node.closest('.timer');
+  if (container) container.classList.toggle('timer-alert', seconds <= 10 && seconds > 0);
+}
+
 function startTimer(seconds, onTimeout) {
   stopTimer();
   state.timeLeft = seconds;
-  const timerNode = document.querySelector('[data-timer]');
-  if (timerNode) timerNode.textContent = formatTime(state.timeLeft);
+  updateTimerDisplay(state.timeLeft);
   state.timer = setInterval(() => {
     state.timeLeft -= 1;
-    const node = document.querySelector('[data-timer]');
-    if (node) node.textContent = formatTime(Math.max(0, state.timeLeft));
+    updateTimerDisplay(state.timeLeft);
     if (state.timeLeft <= 0) {
       stopTimer();
       showFeedback('tempo esgotado', 'tempo-esgotado', () => onTimeout());
@@ -168,11 +299,14 @@ function startLevel1() {
 
 function renderLevel1Question() {
   const q = level1[state.currentQuestion];
+  const n = level1.length;
   app.innerHTML = `
     <section class="two-column">
       <div class="card">
         <div class="timer">Tempo: <span data-timer></span></div>
-        <h3>Questão ${state.currentQuestion + 1} de 5</h3>
+        ${progressDots(state.currentQuestion, n)}
+        ${scoreLabel(state.score)}
+        <h3>Questão ${state.currentQuestion + 1} de ${n}</h3>
         <p>Número do painel</p>
         <div class="panel-number">${q.panel}</div>
       </div>
@@ -212,6 +346,7 @@ function endLevel1() {
     <section class="card feedback">
       <div class="image-wrap">${imageTag(win ? 'nivel1-vitoria' : 'nivel1-derrota', win ? 'Vitória nível 1' : 'Derrota nível 1')}</div>
       <h2>${win ? 'Vocês conseguiram! As luzes da nave voltaram a se acender!' : 'Vocês fracassaram, é preciso escalar outra equipe para tentar fazer o trabalho.'}</h2>
+      <p class="phase-summary">Você acertou <strong>${state.score}</strong> de <strong>${level1.length}</strong> questões.</p>
       <button id="level1-action">${win ? 'AVANÇAR' : 'TENTAR NOVAMENTE'}</button>
     </section>
   `;
@@ -219,20 +354,6 @@ function endLevel1() {
     if (!win) return startLevel1();
     showNarrative(4, startLevel2);
   };
-}
-
-function buildGrid(markers) {
-  const letters = ['A', 'B', 'C', 'D', 'E'];
-  const rows = [0, 1, 2, 3, 4].map((r) => {
-    const cells = [1, 2, 3, 4, 5].map((c) => {
-      const marker = markers.find((m) => m.row === r && m.col === c);
-      return `<td>${marker ? marker.symbol : ''}</td>`;
-    }).join('');
-    return `<tr><th>${letters[r]}</th>${cells}</tr>`;
-  }).join('');
-
-  const footer = `<tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>`;
-  return `<table class="grid-board">${rows}${footer}</table>`;
 }
 
 function startLevel2() {
@@ -243,15 +364,18 @@ function startLevel2() {
 
 function renderLevel2Question() {
   const q = level2[state.currentQuestion];
+  const n = level2.length;
   app.innerHTML = `
     <section class="two-column">
       <div class="card">
-        <h3>Questão ${state.currentQuestion + 1} de 5</h3>
+        <h3>Questão ${state.currentQuestion + 1} de ${n}</h3>
         <p>${q.prompt}</p>
         ${buildGrid(q.grid.markers)}
       </div>
       <div class="card">
         <div class="timer">Tempo: <span data-timer></span></div>
+        ${progressDots(state.currentQuestion, n)}
+        ${scoreLabel(state.score)}
         <h3>Alternativas</h3>
         <div class="options">
           ${q.options.map((opt, idx) => `<button data-idx="${idx}">${opt}</button>`).join('')}
@@ -282,6 +406,7 @@ function endLevel2() {
     <section class="card feedback">
       <div class="image-wrap">${imageTag(win ? 'nivel2-vitoria' : 'nivel2-derrota', win ? 'Vitória nível 2' : 'Derrota nível 2')}</div>
       <h2>${win ? 'O mapa foi reconstruído, agora vocês já podem se orientar!' : 'Vocês fracassaram, é preciso escalar outra equipe para tentar fazer o trabalho.'}</h2>
+      <p class="phase-summary">Você acertou <strong>${state.score}</strong> de <strong>${level2.length}</strong> questões.</p>
       <button id="level2-action">${win ? 'AVANÇAR' : 'TENTAR NOVAMENTE'}</button>
     </section>
   `;
@@ -304,11 +429,14 @@ function startLevel3() {
 
 function renderLevel3Question() {
   const q = level3[state.currentQuestion];
+  const n = level3.length;
   app.innerHTML = `
     <section class="two-column">
       <div class="card">
         <div class="timer">Tempo: <span data-timer></span></div>
-        <h3>Questão ${state.currentQuestion + 1} de 5</h3>
+        ${progressDots(state.currentQuestion, n)}
+        ${scoreLabel(state.score)}
+        <h3>Questão ${state.currentQuestion + 1} de ${n}</h3>
         <div class="fuel-panel">Tanque: ${state.fuelValue}%</div>
         <p class="status ${state.fuelValue === 100 ? 'success' : state.fuelValue < 0 ? 'error' : ''}">
           ${state.fuelValue === 100 ? 'Vocês conseguiram. Agora já podem avançar' : ''}
@@ -352,6 +480,7 @@ function endLevel3() {
     <section class="card feedback">
       <div class="image-wrap">${imageTag(win ? 'nivel3-vitoria' : 'nivel3-derrota', win ? 'Vitória nível 3' : 'Derrota nível 3')}</div>
       <h2>${win ? 'Vocês conseguiram! O tanque está cheio e já podem avançar!' : 'Vocês fracassaram, é preciso escalar outra equipe para tentar fazer o trabalho.'}</h2>
+      <p class="phase-summary">Você acertou <strong>${state.score}</strong> de <strong>${level3.length}</strong> questões.</p>
       <button id="level3-action">${win ? 'AVANÇAR' : 'TENTAR NOVAMENTE'}</button>
     </section>
   `;
@@ -392,16 +521,17 @@ function showPinEntry() {
     <section class="card feedback">
       <h2>Digite o código final</h2>
       <div class="pin-inputs">
-        <input maxlength="1" inputmode="numeric" />
-        <input maxlength="1" inputmode="numeric" />
-        <input maxlength="1" inputmode="numeric" />
-        <input maxlength="1" inputmode="numeric" />
+        <input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Dígito 1" />
+        <input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Dígito 2" />
+        <input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Dígito 3" />
+        <input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Dígito 4" />
       </div>
       <button id="check-pin">CONFIRMAR CÓDIGO</button>
     </section>
   `;
 
   const inputs = [...app.querySelectorAll('input')];
+  inputs[0].focus();
   inputs.forEach((input, i) => {
     input.addEventListener('input', () => {
       input.value = input.value.replace(/\D/g, '');
@@ -419,7 +549,7 @@ function showPinEntry() {
         <button id="restart">JOGAR NOVAMENTE</button>
       </section>
     `;
-    sound(win ? 'vitoria-final' : 'vitoria-final');
+    sound(win ? 'vitoria' : 'derrota');
     document.getElementById('restart').onclick = showIntro;
   };
 }
