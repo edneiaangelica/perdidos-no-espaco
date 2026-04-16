@@ -177,7 +177,7 @@ function sound(name) {
 }
 
 function imageTag(name, alt = '') {
-  return `<img src="${imageBase}${name}.svg" alt="${alt || name}" />`;
+  return `<img src="${imageBase}${name}.png" alt="${alt || name}" />`;
 }
 
 function progressDots(current, total) {
@@ -549,7 +549,7 @@ function showPinEntry() {
         <button id="restart">JOGAR NOVAMENTE</button>
       </section>
     `;
-    sound(win ? 'vitoria-final' : 'derrota-final');
+    sound(win ? 'vitoria' : 'derrota');
     document.getElementById('restart').onclick = showIntro;
   };
 }

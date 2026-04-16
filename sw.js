@@ -1,4 +1,4 @@
-const CACHE_NAME = 'perdidos-no-espaco-v1';
+const CACHE_NAME = 'perdidos-no-espaco-v2';
 const PRECACHE = [
   './',
   './index.html',
