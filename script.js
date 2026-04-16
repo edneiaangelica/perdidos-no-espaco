@@ -116,42 +116,42 @@ const narratives = [
 ];
 
 const level1 = [
-  { panel: 9, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 3', 'E) 8 + 0'], correct: 0 },
-  { panel: 10, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 3', 'E) 8 + 2'], correct: 3 },
-  { panel: 8, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 5', 'E) 8 + 1'], correct: 1 },
-  { panel: 14, options: ['A) 6 + 5', 'B) 6 + 3', 'C) 7 + 7', 'E) 8 + 0'], correct: 2 },
-  { panel: 15, options: ['A) 9 + 5', 'B) 7 + 8', 'C) 8 + 8', 'E) 8 + 4'], correct: 1 }
+  { panel: 9, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 3', 'D) 8 + 0'], correct: 0 },
+  { panel: 10, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 3', 'D) 8 + 2'], correct: 3 },
+  { panel: 8, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 5', 'D) 8 + 1'], correct: 1 },
+  { panel: 14, options: ['A) 6 + 5', 'B) 6 + 3', 'C) 7 + 7', 'D) 8 + 0'], correct: 2 },
+  { panel: 15, options: ['A) 9 + 5', 'B) 7 + 8', 'C) 8 + 8', 'D) 8 + 4'], correct: 1 }
 ];
 
 const level2 = [
   {
     prompt: 'Se o astronauta andar 3 casas para cima e 4 casas para a esquerda, ele vai ficar na mesma posição do(a):',
     grid: { markers: [{ row: 4, col: 5, symbol: '🧑‍🚀' }, { row: 1, col: 1, symbol: '☀️' }, { row: 2, col: 2, symbol: '⭐' }, { row: 2, col: 4, symbol: '🌜' }, { row: 3, col: 3, symbol: '☄️' }] },
-    options: ['A) SOL', 'B) LUA', 'C) ASTEROIDE', 'E) ESTRELA'],
+    options: ['A) SOL', 'B) LUA', 'C) ASTEROIDE', 'D) ESTRELA'],
     correct: 0
   },
   {
     prompt: 'Qual é a localização da estrela Alfa?',
     grid: { markers: [{ row: 1, col: 5, symbol: '🌟' }] },
-    options: ['A) A1', 'B) D5', 'C) B5', 'E) C3'],
+    options: ['A) A1', 'B) D5', 'C) B5', 'D) C3'],
     correct: 2
   },
   {
     prompt: 'Se o foguete avançar 4 casas para cima e 2 casas à direita, em que posição ele vai ficar?',
     grid: { markers: [{ row: 4, col: 2, symbol: '🚀' }] },
-    options: ['A) A4', 'B) D5', 'C) B4', 'E) A5'],
+    options: ['A) A4', 'B) D5', 'C) B4', 'D) A5'],
     correct: 0
   },
   {
     prompt: 'Qual é a posição do astronauta?',
     grid: { markers: [{ row: 0, col: 3, symbol: '🧑‍🚀' }] },
-    options: ['A) A4', 'B) A3', 'C) C4', 'E) B1'],
+    options: ['A) A4', 'B) A3', 'C) C4', 'D) B1'],
     correct: 1
   },
   {
     prompt: 'Se o astronauta avançar duas casas para baixo e duas casas à esquerda, ele vai ficar em qual posição?',
     grid: { markers: [{ row: 0, col: 3, symbol: '🧑‍🚀' }] },
-    options: ['A) A3', 'B) D1', 'C) C1', 'E) B1'],
+    options: ['A) A3', 'B) D1', 'C) C1', 'D) B1'],
     correct: 2
   }
 ];
