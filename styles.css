@@ -12,134 +12,312 @@
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Orbitron', Arial, Helvetica, sans-serif;
   background: radial-gradient(circle at top, #19214a, var(--bg));
   color: var(--text);
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
+/* ── HUD ──────────────────────────────────────────────────── */
+#hud {
+  position: fixed;
+  top: env(safe-area-inset-top, 0);
+  right: env(safe-area-inset-right, 0);
+  z-index: 200;
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+}
+
+#hud button {
+  background: rgba(9, 11, 26, 0.82);
+  border: 1px solid rgba(93, 226, 255, 0.35);
+  color: var(--text);
+  font-size: 1.1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  min-width: 40px;
+}
+
+#hud button:hover { filter: brightness(1.2); }
+
+/* ── Install banner ───────────────────────────────────────── */
+#install-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border-top: 1px solid rgba(93, 226, 255, 0.3);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  z-index: 200;
+  font-size: 0.85rem;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0));
+}
+
+#install-banner[hidden] { display: none; }
+
+.install-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#btn-dismiss {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text);
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  min-width: unset;
+}
+
+/* ── App container ────────────────────────────────────────── */
 #app {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 12px 12px 80px;
+  padding-top: calc(56px + env(safe-area-inset-top, 0));
 }
 
+/* ── Layout ───────────────────────────────────────────────── */
 .two-column {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  grid-template-columns: 1fr;
+  gap: 12px;
   align-items: stretch;
 }
 
+@media (min-width: 640px) {
+  .two-column { grid-template-columns: 1fr 1fr; gap: 18px; }
+  #app { padding: 72px 24px 24px; }
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
 .card {
   background: rgba(20, 25, 54, 0.92);
   border: 1px solid rgba(93, 226, 255, 0.2);
   border-radius: 14px;
-  padding: 20px;
+  padding: 14px;
 }
 
+@media (min-width: 640px) {
+  .card { padding: 20px; }
+}
+
+/* ── Images ───────────────────────────────────────────────── */
 .image-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 260px;
+  min-height: 160px;
+}
+
+@media (min-width: 640px) {
+  .image-wrap { min-height: 260px; }
 }
 
 .image-wrap img {
   max-width: 100%;
-  max-height: 360px;
+  max-height: 260px;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+@media (min-width: 640px) {
+  .image-wrap img { max-height: 360px; }
+}
+
+/* ── Typography ───────────────────────────────────────────── */
 h1, h2, h3, p { margin-top: 0; }
 
+h1 { font-size: clamp(1.1rem, 5vw, 2rem); font-weight: 900; }
+h2 { font-size: clamp(0.95rem, 4vw, 1.5rem); }
+h3 { font-size: clamp(0.85rem, 3.5vw, 1.1rem); }
+p  { font-size: clamp(0.8rem, 3vw, 1rem); }
+
+/* ── Buttons ──────────────────────────────────────────────── */
 button {
   border: none;
   border-radius: 10px;
   background: var(--accent);
   color: #041021;
-  font-size: 1rem;
+  font-family: 'Orbitron', Arial, Helvetica, sans-serif;
+  font-size: clamp(0.75rem, 3vw, 1rem);
   font-weight: 700;
-  padding: 12px 18px;
+  padding: 12px 16px;
   cursor: pointer;
+  min-height: 44px;
+  touch-action: manipulation;
 }
 
 button:hover { filter: brightness(1.05); }
+button:active { filter: brightness(0.95); }
 
+/* ── Timer ────────────────────────────────────────────────── */
 .timer {
-  font-size: 1.4rem;
+  font-size: clamp(1rem, 4vw, 1.4rem);
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  transition: color 0.3s;
 }
 
+.timer.timer-alert {
+  color: var(--error);
+  animation: timer-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes timer-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+/* ── Progress dots ────────────────────────────────────────── */
+.progress-dots {
+  display: flex;
+  gap: 6px;
+  margin: 6px 0;
+}
+
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(93, 226, 255, 0.5);
+  flex-shrink: 0;
+}
+
+.dot.done {
+  background: var(--ok);
+  border-color: var(--ok);
+}
+
+.dot.active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Score label ──────────────────────────────────────────── */
+.score-label {
+  font-size: clamp(0.75rem, 3vw, 0.9rem);
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+/* ── Phase summary ────────────────────────────────────────── */
+.phase-summary {
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  color: var(--text);
+  margin: 6px 0 12px;
+}
+
+/* ── Panel / fuel display ─────────────────────────────────── */
 .panel-number,
 .fuel-panel {
   background: var(--panel-2);
   border: 1px solid rgba(93, 226, 255, 0.2);
   border-radius: 12px;
-  padding: 18px;
+  padding: 14px;
   text-align: center;
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 8vw, 2.2rem);
   font-weight: 700;
 }
 
+/* ── Answer options ───────────────────────────────────────── */
 .options {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .options button {
   text-align: left;
   background: #e6f8ff;
   color: #081224;
+  font-size: clamp(0.75rem, 3vw, 1rem);
 }
 
+/* ── Status ───────────────────────────────────────────────── */
 .status {
-  margin-top: 16px;
+  margin-top: 10px;
   font-weight: 700;
+  font-size: clamp(0.75rem, 3vw, 0.95rem);
 }
 
 .status.success { color: var(--ok); }
 .status.error { color: var(--error); }
 
+/* ── Grid (level 2) ───────────────────────────────────────── */
 .grid-board {
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 8px;
+  font-size: clamp(0.7rem, 3vw, 1rem);
+}
+
+.grid-board thead th {
+  background: rgba(93, 226, 255, 0.15);
+  font-weight: 700;
+  color: var(--accent);
 }
 
 .grid-board th,
 .grid-board td {
   border: 1px solid rgba(255, 255, 255, 0.25);
-  width: 52px;
-  height: 52px;
+  width: clamp(36px, 10vw, 52px);
+  height: clamp(36px, 10vw, 52px);
   text-align: center;
+  font-size: clamp(1rem, 4vw, 1.4rem);
 }
 
+.grid-board th[scope="row"] {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: clamp(0.65rem, 2.5vw, 0.85rem);
+}
+
+/* ── PIN inputs ───────────────────────────────────────────── */
 .pin-inputs {
   display: grid;
-  grid-template-columns: repeat(4, minmax(52px, 80px));
-  gap: 14px;
-  margin: 20px 0;
+  grid-template-columns: repeat(4, minmax(44px, 72px));
+  gap: 10px;
+  margin: 16px 0;
 }
 
 .pin-inputs input {
   width: 100%;
   aspect-ratio: 1;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 7vw, 2rem);
+  font-family: 'Orbitron', Arial, Helvetica, sans-serif;
   text-align: center;
   border-radius: 10px;
   border: 2px solid var(--accent);
   background: #f3f7ff;
+  color: #041021;
+  min-height: 44px;
 }
 
+/* ── Feedback card ────────────────────────────────────────── */
 .feedback {
   display: grid;
   place-items: center;
   text-align: center;
-  min-height: 300px;
+  gap: 12px;
+  min-height: 260px;
 }
 
-@media (max-width: 900px) {
-  .two-column { grid-template-columns: 1fr; }
+@media (min-width: 640px) {
+  .feedback { min-height: 300px; }
 }
