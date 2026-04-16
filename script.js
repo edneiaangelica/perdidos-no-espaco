@@ -27,7 +27,7 @@ const level1 = [
   { panel: 9, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 3', 'E) 8 + 0'], correct: 0 },
   { panel: 10, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 3', 'E) 8 + 2'], correct: 3 },
   { panel: 8, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 3', 'E) 8 + 0'], correct: 1 },
-  { panel: 12, options: ['A) 6 + 5', 'B) 6 + 3', 'C) 7 + 7', 'E) 8 + 0'], correct: -1 },
+  { panel: 14, options: ['A) 6 + 5', 'B) 6 + 3', 'C) 7 + 7', 'E) 8 + 0'], correct: 2 },
   { panel: 15, options: ['A) 9 + 5', 'B) 7 + 8', 'C) 8 + 8', 'E) 8 + 4'], correct: 1 }
 ];
 
@@ -66,8 +66,8 @@ const level2 = [
 
 const level3 = [
   { options: ['A) 55 + 45', 'B) 55 + 55', 'C) 45 + 45', 'D) 60 + 45'], correct: 0 },
-  { options: ['A) 45 + 50', 'B) 60 + 35', 'C) 35 + 75', 'D) 50 + 45'], correct: -1 },
-  { options: ['A) 78 + 21', 'B) 77 + 34', 'C) 33 + 77', 'D) 65 + 15'], correct: -1 },
+  { options: ['A) 45 + 50', 'B) 60 + 40', 'C) 35 + 75', 'D) 50 + 45'], correct: 1 },
+  { options: ['A) 78 + 22', 'B) 77 + 34', 'C) 33 + 77', 'D) 65 + 15'], correct: 0 },
   { options: ['A) 98 + 1', 'B) 95 + 6', 'C) 84 + 26', 'D) 94 + 6'], correct: 3 },
   { options: ['A) 38 + 45', 'B) 54 + 26', 'C) 63 + 37', 'D) 92 + 7'], correct: 2 }
 ];
