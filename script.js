@@ -125,16 +125,10 @@ const level1 = [
 
 const level2 = [
   {
-    prompt: 'Se o astronauta andar 3 casas para cima e 2 casas para a esquerda, ele vai ficar na mesma posição do(a):',
-    grid: { markers: [
-      { row: 4, col: 5, symbol: '🧑‍🚀' },
-      { row: 1, col: 1, symbol: '☀️' },
-      { row: 2, col: 2, symbol: '⭐' },
-      { row: 1, col: 3, symbol: '🌜' },
-      { row: 3, col: 3, symbol: '☄️' }
-    ] },
+    prompt: 'Se o astronauta andar 3 casas para cima e 4 casas para a esquerda, ele vai ficar na mesma posição do(a):',
+    grid: { markers: [{ row: 4, col: 5, symbol: '🧑‍🚀' }, { row: 1, col: 1, symbol: '☀️' }, { row: 2, col: 2, symbol: '⭐' }, { row: 2, col: 4, symbol: '🌜' }, { row: 3, col: 3, symbol: '☄️' }] },
     options: ['A) SOL', 'B) LUA', 'C) ASTEROIDE', 'E) ESTRELA'],
-    correct: 1
+    correct: 0
   },
   {
     prompt: 'Qual é a localização da estrela Alfa?',
@@ -150,15 +144,15 @@ const level2 = [
   },
   {
     prompt: 'Qual é a posição do astronauta?',
-    grid: { markers: [{ row: 0, col: 4, symbol: '🧑‍🚀' }] },
+    grid: { markers: [{ row: 0, col: 3, symbol: '🧑‍🚀' }] },
     options: ['A) A4', 'B) A3', 'C) C4', 'E) B1'],
     correct: 0
   },
   {
-    prompt: 'Se o astronauta avançar duas casas para baixo e três casas à esquerda, ele vai ficar em qual posição?',
-    grid: { markers: [{ row: 1, col: 4, symbol: '🧑‍🚀' }] },
+    prompt: 'Se o astronauta avançar duas casas para baixo e duas casas à esquerda, ele vai ficar em qual posição?',
+    grid: { markers: [{ row: 0, col: 3, symbol: '🧑‍🚀' }] },
     options: ['A) A3', 'B) D1', 'C) C1', 'E) B1'],
-    correct: 1
+    correct: 2
   }
 ];
 
