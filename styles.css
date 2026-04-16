@@ -96,13 +96,12 @@ body {
 /* ── Layout ───────────────────────────────────────────────── */
 .two-column {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
   align-items: stretch;
 }
 
 @media (min-width: 640px) {
-  .two-column { grid-template-columns: 1fr 1fr; gap: 18px; }
   #app { padding: 72px 24px 24px; }
 }
 
