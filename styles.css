@@ -421,4 +421,6 @@ button:active { filter: brightness(0.95); }
   .status { margin-top: 4px; }
 
   .phase-summary { margin: 3px 0 6px; }
+
+  li { line-height: 1.3; }
 }
