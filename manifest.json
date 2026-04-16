@@ -6,7 +6,7 @@
   "display": "standalone",
   "background_color": "#090b1a",
   "theme_color": "#090b1a",
-  "orientation": "portrait",
+  "orientation": "landscape",
   "icons": [
     {
       "src": "assets/images/tela-inicial.png",

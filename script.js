@@ -30,6 +30,14 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
 
+// ── Orientation lock ──────────────────────────────────────────
+function lockLandscape() {
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(() => {});
+  }
+}
+lockLandscape();
+
 // ── PWA install prompt ────────────────────────────────────────
 let deferredInstallPrompt = null;
 const installBanner = document.getElementById('install-banner');
@@ -89,7 +97,9 @@ btnSound.addEventListener('click', () => {
 // ── HUD: fullscreen toggle ────────────────────────────────────
 btnFullscreen.addEventListener('click', () => {
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(() => {});
+    document.documentElement.requestFullscreen()
+      .then(() => lockLandscape())
+      .catch(() => {});
   } else {
     document.exitFullscreen().catch(() => {});
   }

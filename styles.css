@@ -323,3 +323,102 @@ button:active { filter: brightness(0.95); }
 @media (min-width: 640px) {
   .feedback { min-height: 300px; }
 }
+
+/* ── Portrait warning overlay ─────────────────────────────── */
+.rotate-hint {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+@media (orientation: portrait) {
+  .rotate-hint { display: flex; }
+}
+
+/* ── Landscape compact layout (mobile in landscape) ───────── */
+@media (orientation: landscape) and (max-height: 520px) {
+  #hud button {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 0.85rem;
+  }
+
+  #app {
+    padding: 4px 10px 4px;
+    padding-top: calc(40px + env(safe-area-inset-top, 0));
+  }
+
+  .two-column {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .card { padding: 8px 10px; }
+
+  .image-wrap { min-height: 50px; }
+
+  .image-wrap img { max-height: 100px; }
+
+  .feedback {
+    min-height: unset;
+    gap: 6px;
+  }
+
+  h1 { font-size: clamp(0.85rem, 3.5vw, 1.2rem); }
+  h2 { font-size: clamp(0.78rem, 2.8vw, 1rem); }
+  h3 { font-size: clamp(0.72rem, 2.4vw, 0.88rem); }
+  p  { font-size: clamp(0.68rem, 2.2vw, 0.82rem); }
+
+  button {
+    padding: 6px 10px;
+    min-height: 36px;
+    font-size: clamp(0.66rem, 2.3vw, 0.82rem);
+  }
+
+  .dot { width: 14px; height: 14px; }
+
+  .progress-dots {
+    margin: 2px 0;
+    gap: 4px;
+  }
+
+  .timer {
+    font-size: clamp(0.78rem, 2.8vw, 1rem);
+    margin-bottom: 4px;
+  }
+
+  .panel-number,
+  .fuel-panel {
+    padding: 6px 10px;
+    font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+  }
+
+  .options { gap: 4px; }
+
+  .pin-inputs {
+    margin: 6px 0;
+    gap: 6px;
+    grid-template-columns: repeat(4, minmax(38px, 60px));
+  }
+
+  .pin-inputs input {
+    font-size: clamp(1.1rem, 5vw, 1.6rem);
+    min-height: 36px;
+  }
+
+  .score-label { margin-bottom: 4px; }
+
+  .status { margin-top: 4px; }
+
+  .phase-summary { margin: 3px 0 6px; }
+}
