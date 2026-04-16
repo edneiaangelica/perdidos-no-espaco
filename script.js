@@ -177,7 +177,7 @@ function sound(name) {
 }
 
 function imageTag(name, alt = '') {
-  return `<img src="${imageBase}${name}.png" alt="${alt || name}" />`;
+  return `<img src="${imageBase}${name}.svg" alt="${alt || name}" />`;
 }
 
 function progressDots(current, total) {

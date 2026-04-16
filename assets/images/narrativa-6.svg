@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+<defs><radialGradient id="bg" cx="50%" cy="40%" r="70%"><stop offset="0%" stop-color="#0a1a2a"/><stop offset="100%" stop-color="#090b1a"/></radialGradient></defs>
+<rect width="400" height="300" fill="url(#bg)"/>
+<circle cx="25" cy="12" r="1.5" fill="white" opacity="0.8"/><circle cx="160" cy="20" r="1.5" fill="white" opacity="0.7"/><circle cx="320" cy="12" r="1" fill="white" opacity="0.6"/><circle cx="8" cy="195" r="1" fill="white" opacity="0.5"/>
+<!-- fuel tank body --><rect x="130" y="80" width="140" height="170" rx="20" fill="#141936" stroke="#5de2ff" stroke-width="2"/>
+<!-- tank cap --><rect x="170" y="65" width="60" height="20" rx="5" fill="#202750" stroke="#5de2ff" stroke-width="1.5"/>
+<!-- fuel level (empty) --><rect x="140" y="90" width="120" height="150" rx="15" fill="#0a0e20"/>
+<!-- fuel gauge marks --><line x1="130" y1="110" x2="145" y2="110" stroke="#5de2ff" stroke-width="1.5"/><text x="120" y="114" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#5de2ff">100%</text>
+<line x1="130" y1="155" x2="145" y2="155" stroke="#5de2ff" stroke-width="1.5"/><text x="120" y="159" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#5de2ff">50%</text>
+<line x1="130" y1="235" x2="145" y2="235" stroke="#5de2ff" stroke-width="1.5"/><text x="120" y="239" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#5de2ff">0%</text>
+<!-- crack/damage --><polyline points="185,120 195,140 180,155 200,180" stroke="#ff6f91" stroke-width="2.5" fill="none"/>
+<!-- empty label --><text x="200" y="200" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="bold" fill="#ff6f91">VAZIO</text>
+<text x="200" y="278" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#5de2ff">TANQUE DE COMBUSTÍVEL</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+<defs><radialGradient id="bg" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#0a3a1a"/><stop offset="100%" stop-color="#090b1a"/></radialGradient></defs>
+<rect width="400" height="300" fill="url(#bg)"/>
+<circle cx="25" cy="12" r="1.5" fill="white" opacity="0.8"/><circle cx="160" cy="20" r="1.5" fill="white" opacity="0.7"/><circle cx="265" cy="18" r="1.5" fill="white" opacity="0.8"/><circle cx="375" cy="25" r="2" fill="white" opacity="0.5"/><circle cx="8" cy="195" r="1" fill="white" opacity="0.5"/><circle cx="360" cy="258" r="2" fill="white" opacity="0.6"/>
+<!-- outer glow circle --><circle cx="200" cy="138" r="85" fill="#3ad47c" opacity="0.15"/><circle cx="200" cy="138" r="70" fill="#3ad47c" opacity="0.12"/>
+<!-- main circle --><circle cx="200" cy="138" r="62" fill="#1a5a2a" stroke="#3ad47c" stroke-width="3"/>
+<!-- checkmark --><polyline points="160,138 188,166 248,110" stroke="#3ad47c" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<!-- stars celebration --><circle cx="100" cy="70" r="5" fill="#ffcc00"/><circle cx="310" cy="60" r="4" fill="#ffcc00"/><circle cx="80" cy="200" r="4" fill="#ffcc00"/><circle cx="320" cy="210" r="5" fill="#ffcc00"/>
+<!-- sparkles --><line x1="100" y1="60" x2="100" y2="45" stroke="#ffcc00" stroke-width="1.5"/><line x1="90" y1="70" x2="76" y2="70" stroke="#ffcc00" stroke-width="1.5"/>
+<text x="200" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#3ad47c">CORRETO!</text>
+<text x="200" y="258" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="white" opacity="0.8">Muito bem, continue assim!</text>
+</svg>

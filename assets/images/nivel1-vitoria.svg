@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+<defs><radialGradient id="bg" cx="50%" cy="40%" r="70%"><stop offset="0%" stop-color="#0a2a1a"/><stop offset="100%" stop-color="#090b1a"/></radialGradient></defs>
+<rect width="400" height="300" fill="url(#bg)"/>
+<circle cx="25" cy="12" r="1.5" fill="white" opacity="0.8"/><circle cx="160" cy="20" r="1.5" fill="white" opacity="0.7"/><circle cx="265" cy="18" r="1.5" fill="white" opacity="0.8"/><circle cx="375" cy="25" r="2" fill="white" opacity="0.5"/>
+<!-- spaceship --><ellipse cx="200" cy="148" rx="90" ry="35" fill="#141936" stroke="#5de2ff" stroke-width="1.5"/>
+<!-- lit windows --><circle cx="155" cy="143" r="12" fill="#3ad47c" opacity="0.9"/>
+<circle cx="200" cy="140" r="12" fill="#3ad47c" opacity="0.9"/>
+<circle cx="245" cy="143" r="12" fill="#3ad47c" opacity="0.9"/>
+<!-- glow around windows --><circle cx="155" cy="143" r="18" fill="#3ad47c" opacity="0.25"/>
+<circle cx="200" cy="140" r="18" fill="#3ad47c" opacity="0.25"/>
+<circle cx="245" cy="143" r="18" fill="#3ad47c" opacity="0.25"/>
+<!-- cockpit on top --><ellipse cx="200" cy="120" rx="30" ry="18" fill="#1a3a2a" stroke="#3ad47c" stroke-width="1.5"/>
+<!-- fin --><polygon points="120,170 80,200 120,185" fill="#1a2860"/>
+<polygon points="280,170 320,200 280,185" fill="#1a2860"/>
+<!-- engine glow --><ellipse cx="200" cy="185" rx="35" ry="15" fill="#3ad47c" opacity="0.4"/>
+<!-- stars celebration --><circle cx="80" cy="70" r="5" fill="#ffcc00"/><circle cx="320" cy="65" r="5" fill="#ffcc00"/><circle cx="60" cy="220" r="4" fill="#ffcc00"/><circle cx="340" cy="210" r="4" fill="#ffcc00"/>
+<text x="200" y="240" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="bold" fill="#3ad47c">LUZES ACESAS!</text>
+<text x="200" y="268" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="white" opacity="0.8">Central de energia restaurada</text>
+</svg>

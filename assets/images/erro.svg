@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+<defs><radialGradient id="bg" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3a0a0a"/><stop offset="100%" stop-color="#090b1a"/></radialGradient></defs>
+<rect width="400" height="300" fill="url(#bg)"/>
+<circle cx="25" cy="12" r="1.5" fill="white" opacity="0.8"/><circle cx="160" cy="20" r="1.5" fill="white" opacity="0.7"/><circle cx="265" cy="18" r="1.5" fill="white" opacity="0.8"/><circle cx="375" cy="25" r="2" fill="white" opacity="0.5"/><circle cx="8" cy="195" r="1" fill="white" opacity="0.5"/>
+<!-- outer glow --><circle cx="200" cy="138" r="85" fill="#ff6f91" opacity="0.12"/><circle cx="200" cy="138" r="70" fill="#ff6f91" opacity="0.1"/>
+<!-- main circle --><circle cx="200" cy="138" r="62" fill="#3a0a18" stroke="#ff6f91" stroke-width="3"/>
+<!-- X mark --><line x1="163" y1="101" x2="237" y2="175" stroke="#ff6f91" stroke-width="12" stroke-linecap="round"/>
+<line x1="237" y1="101" x2="163" y2="175" stroke="#ff6f91" stroke-width="12" stroke-linecap="round"/>
+<text x="200" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#ff6f91">INCORRETO!</text>
+<text x="200" y="258" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="white" opacity="0.8">Tente novamente na próxima!</text>
+</svg>

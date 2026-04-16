@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+<defs>
+<radialGradient id="bg" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#0a2a3a"/><stop offset="100%" stop-color="#090b1a"/></radialGradient>
+<radialGradient id="portal" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#3ad47c" stop-opacity="0.5"/><stop offset="100%" stop-color="#0a2a1a" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="400" height="300" fill="url(#bg)"/>
+<circle cx="25" cy="12" r="1.5" fill="white" opacity="0.8"/><circle cx="160" cy="20" r="1.5" fill="white" opacity="0.7"/><circle cx="265" cy="18" r="1.5" fill="white" opacity="0.8"/><circle cx="375" cy="25" r="2" fill="white" opacity="0.5"/><circle cx="8" cy="195" r="1" fill="white" opacity="0.5"/>
+<!-- portal (open) --><ellipse cx="200" cy="148" rx="100" ry="110" fill="url(#portal)"/>
+<ellipse cx="200" cy="148" rx="90" ry="100" fill="none" stroke="#3ad47c" stroke-width="4"/>
+<!-- spaceship exiting through portal --><g transform="translate(200,148) rotate(-20)">
+<ellipse cx="0" cy="0" rx="35" ry="14" fill="#5de2ff"/>
+<polygon points="0,-22 -12,-5 12,-5" fill="#3ab0cc"/>
+<circle cx="0" cy="0" r="7" fill="white" opacity="0.9"/>
+<ellipse cx="-28" cy="5" rx="12" ry="6" fill="#3ad47c" opacity="0.7"/>
+</g>
+<!-- trophy above portal --><polygon points="200,30 218,55 245,55 223,72 231,99 200,82 169,99 177,72 155,55 182,55" fill="#ffcc00"/>
+<circle cx="200" cy="18" r="8" fill="#ffcc00" opacity="0.6"/>
+<!-- celebration stars --><circle cx="60" cy="80" r="6" fill="#ffcc00"/><circle cx="340" cy="75" r="5" fill="#ffcc00"/><circle cx="50" cy="210" r="5" fill="#3ad47c"/><circle cx="350" cy="220" r="6" fill="#3ad47c"/>
+<text x="200" y="278" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="bold" fill="#3ad47c">MISSÃO CUMPRIDA!</text>
+</svg>
