@@ -438,6 +438,7 @@ function renderLevel3Question() {
       </div>
       <div class="card">
         <h3>Escolha a operação:</h3>
+        <p>Descubra qual é a operação que deixa o tanque 100% cheio.</p>
         <div class="options">
           ${q.options.map((opt, idx) => `<button data-idx="${idx}">${opt}</button>`).join('')}
         </div>
