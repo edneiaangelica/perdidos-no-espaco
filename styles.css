@@ -17,6 +17,8 @@ body {
   color: var(--text);
   min-height: 100vh;
   min-height: 100dvh;
+  overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 /* ── HUD ──────────────────────────────────────────────────── */
@@ -345,7 +347,7 @@ button:active { filter: brightness(0.95); }
 }
 
 /* ── Landscape compact layout (mobile in landscape) ───────── */
-@media (orientation: landscape) and (max-height: 520px) {
+@media (orientation: landscape) and (max-height: 600px) {
   #hud button {
     width: 32px;
     height: 32px;
@@ -404,6 +406,21 @@ button:active { filter: brightness(0.95); }
   }
 
   .options { gap: 4px; }
+
+  .grid-board {
+    font-size: clamp(0.6rem, 2.5vw, 0.9rem);
+  }
+
+  .grid-board th,
+  .grid-board td {
+    width: clamp(20px, 6vw, 34px);
+    height: clamp(20px, 6vw, 34px);
+    font-size: clamp(0.65rem, 2.5vw, 1rem);
+  }
+
+  .grid-board th[scope="row"] {
+    font-size: clamp(0.5rem, 1.8vw, 0.7rem);
+  }
 
   .pin-inputs {
     margin: 6px 0;
