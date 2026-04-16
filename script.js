@@ -118,7 +118,7 @@ const narratives = [
 const level1 = [
   { panel: 9, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 3', 'E) 8 + 0'], correct: 0 },
   { panel: 10, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 3', 'E) 8 + 2'], correct: 3 },
-  { panel: 8, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 5', 'E) 8 + 0'], correct: 1 },
+  { panel: 8, options: ['A) 4 + 5', 'B) 6 + 2', 'C) 5 + 5', 'E) 8 + 1'], correct: 1 },
   { panel: 14, options: ['A) 6 + 5', 'B) 6 + 3', 'C) 7 + 7', 'E) 8 + 0'], correct: 2 },
   { panel: 15, options: ['A) 9 + 5', 'B) 7 + 8', 'C) 8 + 8', 'E) 8 + 4'], correct: 1 }
 ];
