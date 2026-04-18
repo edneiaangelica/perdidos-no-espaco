@@ -12,7 +12,7 @@
 
 body {
   margin: 0;
-  font-family: 'Orbitron', Arial, Helvetica, sans-serif;
+  font-family: 'Exo 2', Arial, Helvetica, sans-serif;
   background: radial-gradient(circle at top, #19214a, var(--bg));
   color: var(--text);
   min-height: 100vh;
@@ -90,8 +90,13 @@ body {
 #app {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 12px 12px 80px;
-  padding-top: calc(56px + env(safe-area-inset-top, 0));
+  min-height: 100dvh;
+  padding: 8px 8px calc(64px + env(safe-area-inset-bottom, 0));
+  padding-top: calc(52px + env(safe-area-inset-top, 0));
+}
+
+#app > section {
+  min-height: calc(100dvh - 60px - env(safe-area-inset-top, 0) - env(safe-area-inset-bottom, 0));
 }
 
 /* ── Layout ───────────────────────────────────────────────── */
@@ -104,6 +109,7 @@ body {
 
 @media (min-width: 640px) {
   #app { padding: 72px 24px 24px; }
+  #app > section { min-height: auto; }
   .two-column { grid-template-columns: 1fr 1fr; gap: 18px; }
 }
 
@@ -144,11 +150,31 @@ body {
 
 /* ── Typography ───────────────────────────────────────────── */
 h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3 { font-family: 'Orbitron', Arial, Helvetica, sans-serif; }
 
 h1 { font-size: clamp(1.1rem, 5vw, 2rem); font-weight: 900; }
 h2 { font-size: clamp(0.95rem, 4vw, 1.5rem); }
 h3 { font-size: clamp(0.85rem, 3.5vw, 1.1rem); }
 p  { font-size: clamp(0.8rem, 3vw, 1rem); }
+
+.narrative-layout .image-wrap {
+  min-height: clamp(220px, 40dvh, 380px);
+}
+
+.narrative-layout .image-wrap img {
+  max-height: min(48dvh, 420px);
+}
+
+.narrative-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.narrative-text {
+  font-size: clamp(1rem, 4.8vw, 1.35rem);
+  line-height: 1.55;
+}
 
 /* ── Buttons ──────────────────────────────────────────────── */
 button {
