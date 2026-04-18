@@ -273,11 +273,11 @@ function showNarrative(index, next) {
   stopTimer();
   const n = narratives[index];
   app.innerHTML = `
-    <section class="two-column">
+    <section class="two-column narrative-layout">
       <div class="card image-wrap">${imageTag(n.image, `Narrativa ${index + 1}`)}</div>
-      <div class="card">
+      <div class="card narrative-card">
         <h2>Narrativa ${index + 1}</h2>
-        <p>${n.text}</p>
+        <p class="narrative-text">${n.text}</p>
         <button id="next">AVANÇAR</button>
       </div>
     </section>
